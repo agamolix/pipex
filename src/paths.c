@@ -1,24 +1,24 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   paths.c											:+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: atrilles <atrilles@student.42.fr>		  +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2022/04/22 17:40:41 by atrilles		  #+#	#+#			 */
-/*   Updated: 2022/04/22 17:41:03 by atrilles		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   paths.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atrilles <atrilles@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/23 15:52:04 by atrilles          #+#    #+#             */
+/*   Updated: 2022/05/23 15:53:19 by atrilles         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-char **find_paths(char **envp)
+char	**find_paths(char **envp)
 {
-	char **paths;
-	int i;
+	char	**paths;
+	int		i;
 
 	i = 0;
-	while(envp[i])
+	while (envp[i])
 	{
 		if (str_n_cmp(envp[i], "PATH", 4) == 0)
 			paths = my_split(envp[i], ':');
@@ -27,10 +27,10 @@ char **find_paths(char **envp)
 	return (paths);
 }
 
-char **modify_paths(char **paths)
+char	**modify_paths(char **paths)
 {
-	int i;
-	char *temp;
+	int		i;
+	char	*temp;
 
 	i = 0;
 	while (paths[i])
@@ -49,11 +49,11 @@ char **modify_paths(char **paths)
 	return (paths);
 }
 
-char *find_right_path(char **paths, char *cmd)
+char	*find_right_path(char **paths, char *cmd)
 {
-	int i;
-	char *path;
-	char *temp;
+	int		i;
+	char	*path;
+	char	*temp;
 
 	i = 0;
 	while (paths[i])
@@ -68,10 +68,10 @@ char *find_right_path(char **paths, char *cmd)
 	return (0);
 }
 
-char *find_path(char **envp, char *cmd)
+char	*find_path(char **envp, char *cmd)
 {
-	char **paths;
-	char *path;
+	char	**paths;
+	char	*path;
 
 	paths = find_paths(&envp[0]);
 	modify_paths(&paths[0]);

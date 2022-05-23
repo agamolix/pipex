@@ -1,20 +1,20 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   pipex.c											:+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: atrilles <atrilles@student.42.fr>		  +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2022/04/22 17:40:41 by atrilles		  #+#	#+#			 */
-/*   Updated: 2022/04/22 17:41:03 by atrilles		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atrilles <atrilles@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/23 15:47:39 by atrilles          #+#    #+#             */
+/*   Updated: 2022/05/23 15:51:04 by atrilles         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void child1(t_data *data, int my_pipe[2])
+void	child1(t_data *data, int my_pipe[2])
 {
-	char **options;
+	char	**options;
 
 	close(my_pipe[0]);
 	if (dup2(data->fd1, 0) == -1)
@@ -32,12 +32,12 @@ void child1(t_data *data, int my_pipe[2])
 	execve(data->path1, options, data->env);
 }
 
-void child2(t_data *data, int my_pipe[2])
+void	child2(t_data *data, int my_pipe[2])
 {
-	char **options;
+	char	**options;
 
 	close(my_pipe[1]);
-	if(dup2(my_pipe[0], 0) == -1)
+	if (dup2(my_pipe[0], 0) == -1)
 		exit_mymessage("Dup2 child2 (stdin): unexpected error", data);
 	if (dup2(data->fd2, 1) == -1)
 		exit_mymessage("Dup2 child2 (stdout): unexpected error", data);
@@ -52,12 +52,12 @@ void child2(t_data *data, int my_pipe[2])
 	execve(data->path2, options, data->env);
 }
 
-t_data *pipex(t_data *data)
+t_data	*pipex(t_data *data)
 {
-	int status;
-	pid_t fork1;
-	pid_t fork2;
-	int my_pipe[2];
+	int		status;
+	pid_t	fork1;
+	pid_t	fork2;
+	int		my_pipe[2];
 
 	if (pipe(my_pipe) == -1)
 		exit_errormessage("Pipe error", data);
@@ -80,7 +80,7 @@ t_data *pipex(t_data *data)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_data data;
+	t_data	data;
 
 	data.agv = argv;
 	data.env = envp;
@@ -91,12 +91,12 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 5)
 		exit_mymessage("Use 4 arguments: file1 cmd1 cmd2 file2", &data);
 	data.fd1 = open(argv[1], O_RDONLY);
-	if (data.fd1 == -1) 
+	if (data.fd1 == -1)
 		exit_errormessage("Open file1 error", &data);
 	data.fd2 = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0640);
-	if (data.fd2 == -1) 
+	if (data.fd2 == -1)
 		exit_errormessage("Open file2 error", &data);
 	pipex(&data);
 	close_success(&data);
-	return 0;
+	return (0);
 }

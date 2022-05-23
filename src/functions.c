@@ -1,27 +1,27 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   functions.c 										:+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: atrilles <atrilles@student.42.fr>		  +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2022/04/22 17:40:41 by atrilles		  #+#	#+#			 */
-/*   Updated: 2022/04/22 17:41:03 by atrilles		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   functions.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atrilles <atrilles@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/23 15:54:58 by atrilles          #+#    #+#             */
+/*   Updated: 2022/05/23 15:57:13 by atrilles         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int str_len(char const *str)
+int	str_len(char const *str)
 {
-    int len;
+	int	len;
 
 	if (str == 0)
-		return 0;
-    len = 0;
-    while (str[len])
-        len++;
-    return len;
+		return (0);
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
 }
 
 char	*str_join(char *s1, char *s2)
@@ -46,41 +46,41 @@ char	*str_join(char *s1, char *s2)
 	return (res);
 }
 
-char    *emptystr()
+char	*emptystr(void)
 {
-    char    *res;
+	char	*res;
 
-    res = malloc(sizeof(char));
-    res[0] = 0;
-    return res;
+	res = malloc(sizeof(char));
+	res[0] = 0;
+	return (res);
 }
 
 char	*sub_str(char const *s, unsigned int start, size_t len)
 {
-    char    *res;
-    int i;
+	char	*res;
+	int		i;
 
-    i = 0;
-    if (s == 0)
-        return (0);
-    if ((int)start > str_len((char *)s))
-        return (emptystr());
-    if (len > str_len((char *)s) - start)
-        res = malloc((str_len((char *)s) - start + 1) * sizeof(char));
-    else
-        res = malloc((len + 1) * sizeof(char));
-    if (res == 0)
-        return 0;
-    while (s[start + i] && i < (int)len)
-    {
-        res[i] = s[start + i];
-        i++;
-    }
-    res[i] = 0;
-    return (res);
+	i = 0;
+	if (s == 0)
+		return (0);
+	if ((int)start > str_len((char *)s))
+		return (emptystr());
+	if (len > str_len((char *)s) - start)
+		res = malloc((str_len((char *)s) - start + 1) * sizeof(char));
+	else
+		res = malloc((len + 1) * sizeof(char));
+	if (res == 0)
+		return (0);
+	while (s[start + i] && i < (int)len)
+	{
+		res[i] = s[start + i];
+		i++;
+	}
+	res[i] = 0;
+	return (res);
 }
 
-int str_n_cmp(const char *s1, const char *s2, size_t n)
+int	str_n_cmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 	int		res;

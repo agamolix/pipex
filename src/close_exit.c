@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   close_exit.c									:+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: atrilles <atrilles@student.42.fr>		  +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2022/04/22 17:40:41 by atrilles		  #+#	#+#			 */
-/*   Updated: 2022/04/22 17:41:03 by atrilles		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   close_exit.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atrilles <atrilles@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/23 15:42:42 by atrilles          #+#    #+#             */
+/*   Updated: 2022/05/23 15:44:01 by atrilles         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
@@ -26,8 +26,8 @@ void	close_success(t_data *data)
 
 void	exit_mymessage(char *s, t_data *data)
 {
-    write(2, s, str_len(s));
-    write(2, "\n", 1);
+	write(2, s, str_len(s));
+	write(2, "\n", 1);
 	if (data->path1)
 		free(data->path1);
 	if (data->path2)
